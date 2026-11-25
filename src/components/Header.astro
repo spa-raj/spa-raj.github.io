@@ -1,0 +1,26 @@
+---
+import Icon from "./Icon.astro";
+interface Props {
+  /** "" on the home page (pure anchors), "/" elsewhere so anchors resolve to the home page. */
+  base?: string;
+}
+const { base = "" } = Astro.props;
+const items = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Open source", href: "#open-source" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+---
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href={base ? "/" : "#top"} aria-label="Sparsh Raj, home"><span class="brand-full">sparsh raj</span><span class="brand-short">SR</span></a>
+    <nav aria-label="Sections">
+      <ul>
+        {items.map((i) => <li><a href={base + i.href}>{i.label}</a></li>)}
+      </ul>
+    </nav>
+    <button type="button" class="theme-toggle" hidden aria-label="Switch to dark theme"><Icon name="theme" /></button>
+  </div>
+</header>

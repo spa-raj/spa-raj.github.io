@@ -1,0 +1,78 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # Weekly rebuild (Mondays 06:17 UTC) to refresh src/data/github.json.
+    - cron: "17 6 * * 1"
+
+# Least privilege: nothing by default, each job opts in to what it needs.
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          # No dependency cache on purpose: a deploy job should not restore a cache
+          # that another run could have written (cache poisoning). npm ci is fast here.
+          package-manager-cache: false
+
+      - name: Install dependencies
+        # --ignore-scripts: no dependency install hooks run (the lockfile has none we need).
+        run: npm ci --ignore-scripts
+
+      # pdftotext lets scripts/verify.mjs check the resume PDF's text for the phone number.
+      - name: Install pdftotext
+        run: command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends poppler-utils)
+
+      # The token is only exposed to our own fetch script, not to the Astro build
+      # or any dependency code. The script never fails the build.
+      - name: Fetch GitHub repo data
+        run: npm run fetch:github
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      # postbuild runs scripts/csp.mjs (CSP hashes) and scripts/verify.mjs (PII and
+      # link gate); either one exits 1 and fails the deploy on a problem.
+      - name: Build, inject CSP, verify
+        run: npm run build
+        env:
+          SKIP_GITHUB_FETCH: "1"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+          # Needed for dist/.well-known/security.txt (v4+ drops dotfiles by default).
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

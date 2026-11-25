@@ -1,0 +1,214 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import ExtLink from "../components/ExtLink.astro";
+import { site } from "../data/site";
+import { toISOMonth, resumeHref, starsFor } from "../components/util";
+
+const { profile, links, stats, experience, openSource, projects, skills, education, certifications } = site;
+const resume = resumeHref(links.resume);
+const year = 2026;
+
+/** Split "Feb 2026 – Mar 2026" into parts for <time>. */
+const range = (s: string) => s.split(/\s+–\s+/).filter(Boolean);
+---
+<Base home>
+  <section class="hero" id="top" aria-labelledby="hero-heading">
+    <div class="wrap">
+      <p class="eyebrow">{profile.headline}</p>
+      <h1 id="hero-heading">{profile.name}</h1>
+      <p class="lede">{profile.subline}</p>
+      <p class="location">{profile.location}</p>
+      <ul class="actions">
+        <li><a class="btn" href={links.email}><Icon name="mail" />Email me</a></li>
+        <li><ExtLink href={links.github}>GitHub</ExtLink></li>
+        <li><ExtLink href={links.linkedin}>LinkedIn</ExtLink></li>
+        {resume && <li><a href={resume}>Résumé (PDF)</a></li>}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-heading">
+    <div class="wrap reveal">
+      <h2 class="label" id="about-heading"><span class="idx" aria-hidden="true">01 /</span> About</h2>
+      <div class="body">
+        <p class="prose">{profile.about}</p>
+        <dl class="stats">
+          {stats.map((s) => (
+            <div>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience" aria-labelledby="experience-heading">
+    <div class="wrap reveal">
+      <h2 class="label" id="experience-heading"><span class="idx" aria-hidden="true">02 /</span> Experience</h2>
+      <ol class="body roles">
+        {experience.map((e) => (
+          <li>
+            <article class="role">
+              <p class="role-meta">
+                <span><time datetime={toISOMonth(e.start)}>{e.start}</time> – <time datetime={toISOMonth(e.end)}>{e.end}</time></span>
+                {e.location && <span>{e.location}</span>}
+              </p>
+              <div>
+                <h3>{e.role} <span class="org">· {e.org}</span></h3>
+                {e.context && <p class="muted">{e.context}</p>}
+                <ul class="bullets">
+                  {e.bullets.map((b) => <li>{b}</li>)}
+                </ul>
+                {(e.links?.length || e.org.startsWith("OpenCost")) && (
+                  <p class="inline-links">
+                    {e.org.startsWith("OpenCost") && <a href="#open-source">Details in Open source</a>}
+                    {e.links?.map((l) => <ExtLink href={l.href}>{l.label}</ExtLink>)}
+                  </p>
+                )}
+              </div>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="open-source" aria-labelledby="open-source-heading">
+    <div class="wrap reveal">
+      <h2 class="label" id="open-source-heading"><span class="idx" aria-hidden="true">03 /</span> Open source</h2>
+      <div class="body">
+        <p class="badge">CNCF · OpenCost</p>
+        <p class="prose">{openSource.intro}</p>
+        <ul class="log">
+          {openSource.items.map((item) => (
+            <li>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+              <p class="refs">
+                {item.links.map((l) =>
+                  l.label.startsWith("#") ? (
+                    <ExtLink href={l.href} pre="OpenCost pull request ">{l.label}</ExtLink>
+                  ) : (
+                    <ExtLink href={l.href}>{l.label}</ExtLink>
+                  ),
+                )}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p class="inline-links">
+          {openSource.links.map((l) => <ExtLink href={l.href}>{l.label}</ExtLink>)}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wide" id="projects" aria-labelledby="projects-heading">
+    <div class="wrap reveal">
+      <h2 class="label" id="projects-heading"><span class="idx" aria-hidden="true">04 /</span> Projects</h2>
+      <ul class="body cards">
+        {projects.map((p) => {
+          const stars = starsFor(p.repo);
+          const dates = range(p.date);
+          return (
+            <li>
+              <article class="card">
+                <div class="card-top">
+                  <h3><a href={p.links[0].href} rel="noopener noreferrer">{p.name}</a></h3>
+                  {dates.length > 0 && (
+                    <p class="card-date">
+                      <time datetime={toISOMonth(dates[0])}>{dates[0]}</time>
+                      {dates[1] && <> – <time datetime={toISOMonth(dates[1])}>{dates[1]}</time></>}
+                    </p>
+                  )}
+                </div>
+                <p class="tagline">{p.tagline}{p.context && <span class="muted"> · {p.context}</span>}</p>
+                <p class="summary">{p.summary}</p>
+                {p.details && <p class="details">{p.details}</p>}
+                <ul class="tags" aria-label={`${p.name} tech stack`}>
+                  {p.tags.map((t) => <li>{t}</li>)}
+                </ul>
+                <p class="card-links">
+                  {p.links.map((l) => <ExtLink href={l.href} hint={` for ${p.name}`}>{l.label}</ExtLink>)}
+                  {stars && <span class="stars"><span aria-hidden="true">★</span> {stars}<span class="vh"> GitHub {stars === 1 ? "star" : "stars"}</span></span>}
+                </p>
+              </article>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="skills" aria-labelledby="skills-heading">
+    <div class="wrap reveal">
+      <h2 class="label" id="skills-heading"><span class="idx" aria-hidden="true">05 /</span> Skills</h2>
+      <dl class="body skills">
+        {skills.map((g) => (
+          <div>
+            <dt>{g.group}</dt>
+            <dd>{g.items.join(" · ")}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="education" aria-labelledby="education-heading">
+    <div class="wrap reveal">
+      <h2 class="label" id="education-heading"><span class="idx" aria-hidden="true">06 /</span> Education &amp; certifications</h2>
+      <div class="body edu-grid">
+        <div>
+          <h3 class="sub">Certifications</h3>
+          <ul class="edu">
+            {certifications.map((c) => (
+              <li>
+                <p class="edu-row"><strong>{c.name}</strong><time datetime={toISOMonth(c.date)}>{c.date}</time></p>
+                <p class="muted">{c.issuer}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="sub">Education</h3>
+          <ul class="edu">
+            {education.map((e) => (
+              <li>
+                <p class="edu-row"><strong>{e.degree}</strong><time datetime={toISOMonth(e.date)}>{e.date}</time></p>
+                <p class="muted">{e.school}</p>
+                {e.detail && <p class="muted small">{e.detail}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="section site-footer" id="contact" aria-labelledby="contact-heading" slot="footer">
+    <div class="wrap reveal">
+      <p class="label" aria-hidden="true"><span class="idx">07 /</span> Contact</p>
+      <div class="body">
+        <h2 id="contact-heading" class="contact-lead">Let's talk</h2>
+        <p class="prose">I'm looking for backend and platform engineering roles. Email is the fastest way to reach me.</p>
+        <p><a class="email" href={links.email}><Icon name="mail" />{profile.email}</a></p>
+        <ul class="social">
+          <li><ExtLink href={links.github}><Icon name="github" />GitHub</ExtLink></li>
+          <li><ExtLink href={links.linkedin}><Icon name="linkedin" />LinkedIn</ExtLink></li>
+          <li><ExtLink href={links.x}><Icon name="x" />X</ExtLink></li>
+          {resume && <li><a href={resume}><Icon name="file" />Résumé (PDF)</a></li>}
+        </ul>
+      </div>
+    </div>
+    <div class="wrap colophon">
+      <p>© {year} Sparsh Raj · Bengaluru, India</p>
+      <p>Built with Astro · no trackers</p>
+      <p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></p>
+    </div>
+  </footer>
+</Base>

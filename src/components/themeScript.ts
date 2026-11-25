@@ -1,0 +1,3 @@
+// The ONLY client script on the site. Inlined verbatim in <head> via set:html.
+// scripts/csp.mjs hashes the built output for the CSP on every build, so edits are safe.
+export const themeScript = `(()=>{var d=document.documentElement,s,c=()=>d.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");try{s=localStorage.getItem("theme")}catch(e){}if(s=="dark"||s=="light")d.dataset.theme=s;document.addEventListener("DOMContentLoaded",()=>{var b=document.querySelector(".theme-toggle");if(!b)return;var l=()=>b.setAttribute("aria-label","Switch to "+(c()=="dark"?"light":"dark")+" theme");l();b.hidden=!1;b.addEventListener("click",()=>{var n=c()=="dark"?"light":"dark";d.dataset.theme=n;try{localStorage.setItem("theme",n)}catch(e){}l()})})})()`;

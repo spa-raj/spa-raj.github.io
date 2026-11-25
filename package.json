@@ -1,0 +1,21 @@
+{
+  "name": "sparshraj-portfolio",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "node scripts/fetch-github.mjs",
+    "build": "astro build",
+    "postbuild": "node scripts/csp.mjs && node scripts/verify.mjs",
+    "preview": "astro preview",
+    "fetch:github": "node scripts/fetch-github.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "astro": "7.4.13"
+  }
+}

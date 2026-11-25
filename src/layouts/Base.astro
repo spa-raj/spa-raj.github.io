@@ -1,0 +1,73 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import { themeScript } from "../components/themeScript";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Home page gets canonical, OG/Twitter and JSON-LD; other pages get noindex. */
+  home?: boolean;
+}
+const { title = site.seo.title, description = site.seo.description, home = false } = Astro.props;
+const { seo, profile, links } = site;
+const ogImage = "https://sparshraj.me/og.png";
+
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.title,
+  url: seo.url,
+  sameAs: [links.github, links.linkedin, links.x],
+};
+const ldJson = JSON.stringify(ld).replace(/</g, "\\u003c");
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    {/* scripts/csp.mjs injects the Content-Security-Policy meta right after charset at build time. */}
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline set:html={themeScript}></script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0E1012" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {home ? (
+      <>
+        <link rel="canonical" href={seo.url} />
+        <meta property="og:type" content="profile" />
+        <meta property="og:site_name" content={profile.name} />
+        <meta property="og:url" content={seo.url} />
+        <meta property="og:title" content={seo.ogTitle} />
+        <meta property="og:description" content={seo.ogDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Sparsh Raj, Backend & Platform Engineer" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@spar_raj" />
+        <meta name="twitter:title" content={seo.ogTitle} />
+        <meta name="twitter:description" content={seo.ogDescription} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content="Sparsh Raj, Backend & Platform Engineer" />
+        <script is:inline type="application/ld+json" set:html={ldJson}></script>
+      </>
+    ) : (
+      <meta name="robots" content="noindex" />
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header base={home ? "" : "/"} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

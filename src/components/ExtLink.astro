@@ -1,0 +1,15 @@
+---
+import Icon from "./Icon.astro";
+import { isExternal } from "./util";
+interface Props {
+  href: string;
+  class?: string;
+  /** Visually hidden suffix to make the link name unique out of context. */
+  hint?: string;
+  /** Visually hidden prefix. */
+  pre?: string;
+}
+const { href, class: cls, hint, pre } = Astro.props;
+const ext = isExternal(href);
+---
+<a href={href} class={cls} rel={ext ? "noopener noreferrer" : undefined}>{pre && <span class="vh">{pre}</span>}<slot />{hint && <span class="vh">{hint}</span>}{ext && <Icon name="arrow" />}</a>

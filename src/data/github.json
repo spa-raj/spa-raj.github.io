@@ -1,0 +1,215 @@
+{
+  "generatedAt": "2026-11-25T17:11:47.594Z",
+  "repos": {
+    "family-lock": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/family-lock",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-11-25T11:55:19Z"
+    },
+    "pdf-whisperer": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/pdf-whisperer",
+      "homepage": "https://huggingface.co/spaces/spa-raj/pdf-whisperer",
+      "language": "Python",
+      "pushedAt": "2026-11-22T06:02:31Z"
+    },
+    "codex-course": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/codex-course",
+      "homepage": null,
+      "language": "TypeScript",
+      "pushedAt": "2026-11-15T17:19:02Z"
+    },
+    "DSA-CP": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/DSA-CP",
+      "homepage": null,
+      "language": "C++",
+      "pushedAt": "2026-07-01T09:18:44Z"
+    },
+    "userservice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/userservice",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-04-16T21:50:44Z"
+    },
+    "vibevault-infra": {
+      "stars": 1,
+      "url": "https://github.com/spa-raj/vibevault-infra",
+      "homepage": null,
+      "language": "HCL",
+      "pushedAt": "2026-03-22T08:43:48Z"
+    },
+    "notificationservice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/notificationservice",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-03-22T08:43:26Z"
+    },
+    "paymentgateway": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/paymentgateway",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-03-22T08:43:04Z"
+    },
+    "orderservice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/orderservice",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-03-22T08:42:46Z"
+    },
+    "cartservice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/cartservice",
+      "homepage": null,
+      "language": "Shell",
+      "pushedAt": "2026-03-22T08:42:09Z"
+    },
+    "productservice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/productservice",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-03-22T08:41:46Z"
+    },
+    "vibevault": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/vibevault",
+      "homepage": null,
+      "language": "Shell",
+      "pushedAt": "2026-03-22T08:17:27Z"
+    },
+    "vibevault-roadmap": {
+      "stars": 1,
+      "url": "https://github.com/spa-raj/vibevault-roadmap",
+      "homepage": null,
+      "language": "Shell",
+      "pushedAt": "2026-03-21T11:07:52Z"
+    },
+    "spa-raj": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/spa-raj",
+      "homepage": "https://github.com/sparsh3007",
+      "language": null,
+      "pushedAt": "2026-03-17T09:24:16Z"
+    },
+    "kubernetes-practice": {
+      "stars": 4,
+      "url": "https://github.com/spa-raj/kubernetes-practice",
+      "homepage": null,
+      "language": null,
+      "pushedAt": "2026-02-26T17:10:38Z"
+    },
+    "cartIQ-backend": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/cartIQ-backend",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-02-13T21:19:05Z"
+    },
+    "data-engineering-zoomcamp": {
+      "stars": 1,
+      "url": "https://github.com/spa-raj/data-engineering-zoomcamp",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushedAt": "2026-02-09T22:27:10Z"
+    },
+    "cartIQ-frontend": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/cartIQ-frontend",
+      "homepage": null,
+      "language": "TypeScript",
+      "pushedAt": "2026-01-27T21:53:43Z"
+    },
+    "concurrency-practice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/concurrency-practice",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2026-01-20T12:57:56Z"
+    },
+    "data-analysis-and-visualization": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/data-analysis-and-visualization",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushedAt": "2025-10-17T16:02:17Z"
+    },
+    "dtc-llm-slack-faq-enhancer": {
+      "stars": 3,
+      "url": "https://github.com/spa-raj/dtc-llm-slack-faq-enhancer",
+      "homepage": null,
+      "language": "Python",
+      "pushedAt": "2025-09-06T10:55:40Z"
+    },
+    "ReleaseLens": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/ReleaseLens",
+      "homepage": null,
+      "language": "Makefile",
+      "pushedAt": "2025-08-20T17:09:01Z"
+    },
+    "llmzoomcamp": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/llmzoomcamp",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushedAt": "2025-08-13T18:31:36Z"
+    },
+    "ecommerce-app": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/ecommerce-app",
+      "homepage": null,
+      "language": null,
+      "pushedAt": "2025-07-24T06:36:11Z"
+    },
+    "spa-raj.github.io": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/spa-raj.github.io",
+      "homepage": null,
+      "language": null,
+      "pushedAt": "2025-04-25T06:35:12Z"
+    },
+    "bookmyshow-lld": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/bookmyshow-lld",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2025-03-19T13:24:18Z"
+    },
+    "ParkingLot": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/ParkingLot",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2025-03-13T10:50:42Z"
+    },
+    "TicTacToe-LLD": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/TicTacToe-LLD",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2025-03-11T15:41:46Z"
+    },
+    "paymentservice": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/paymentservice",
+      "homepage": null,
+      "language": "Java",
+      "pushedAt": "2024-04-13T17:52:17Z"
+    },
+    "hello-world": {
+      "stars": 0,
+      "url": "https://github.com/spa-raj/hello-world",
+      "homepage": null,
+      "language": null,
+      "pushedAt": "2021-08-22T16:21:48Z"
+    }
+  }
+}
